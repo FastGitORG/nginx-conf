@@ -2,7 +2,7 @@
 # Only support Debian 10
 
 if [ `whoami` != "root" ];then
-	echo "sudo or root is required!"
+    echo "sudo or root is required!"
     exit 1
 fi
 
@@ -14,8 +14,8 @@ apt install git -y
 curl https://ssl-config.mozilla.org/ffdhe2048.txt > /var/lib/nginx/dhparam.pem
 chmod +r /var/lib/nginx/dhparam.pem
 
-mkdir tmp
-cd tmp
+mkdir fastgit-tmp
+cd fastgit-tmp
 git clone https://github.com/FastGitORG/nginx-conf --depth=1
 
 cd nginx-conf
@@ -28,7 +28,7 @@ cp robots.txt /www/wwwroot/fg
 cd ..
 rm -fR nginx-conf
 cd ..
-rm -fR tmp
+rm -fR fastgit-tmp
 
 # TODO: Put Certs
 echo "Put cert and keys."
