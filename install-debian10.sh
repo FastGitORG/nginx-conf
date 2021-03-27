@@ -6,6 +6,11 @@ if [ `whoami` != "root" ];then
     exit 1
 fi
 
+if [ -f "/etc/debian_version" ]; then
+    echo "Boss, do you want to try debian?"
+    exit 1
+fi
+
 apt update
 
 apt install nginx -y
