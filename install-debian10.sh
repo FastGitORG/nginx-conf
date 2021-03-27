@@ -1,7 +1,7 @@
 #!/bin/bash
 # Only support Debian 10
 
-if [ `whoami` != "root" ];then
+if [ `whoami` != "root" ]; then
     echo "sudo or root is required!"
     exit 1
 fi
