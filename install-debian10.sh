@@ -16,6 +16,8 @@ apt update
 apt install nginx -y
 apt install git -y
 
+systemctl enable nginx
+
 curl https://ssl-config.mozilla.org/ffdhe2048.txt > /var/lib/nginx/dhparam.pem
 chmod +r /var/lib/nginx/dhparam.pem
 
@@ -42,6 +44,5 @@ echo "Thank you! :D"
 
 # nginx -t
 
-# systemctl enable nginx
 # systemctl start nginx
 # systemctl reload nginx
