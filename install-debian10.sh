@@ -31,6 +31,7 @@ cp *.conf /etc/ngins/sites-enabled
 
 mkdir -p /www/wwwroot/fg
 cp robots.txt /www/wwwroot/fg
+echo "OK!" > /www/wwwroot/fg/index.html
 
 cd ..
 rm -fR nginx-conf
