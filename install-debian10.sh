@@ -39,7 +39,7 @@ cd ..
 rm -fR fastgit-tmp
 
 # TODO: Put Cert
-echo "Please put cert and key to \var\www\cert"
+echo "Please put cert and key to /var/www/cert"
 echo "Then reload nginx."
 echo "Thank you! :D"
 
