@@ -27,7 +27,7 @@ git clone https://github.com/FastGitORG/nginx-conf --depth=1
 
 cd nginx-conf
 
-cp *.conf /etc/ngins/sites-enabled
+cp *.conf /etc/nginx/sites-enabled
 
 mkdir -p /www/wwwroot/fg
 cp robots.txt /www/wwwroot/fg
