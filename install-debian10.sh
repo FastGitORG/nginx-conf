@@ -11,20 +11,28 @@ if [ ! -f "/etc/debian_version" ]; then
     exit 1
 fi
 
+echo "[I] Basic operations"
 apt update
 
+echo "[I] Install Nginx & git"
 apt install nginx -y
 apt install git -y
 
+echo "[I] I love NGINX"
 systemctl enable nginx
+systemctl start nginx
+systemctl stop nginx
 
+echo "[I] Install dhparam"
 curl https://ssl-config.mozilla.org/ffdhe2048.txt > /var/lib/nginx/dhparam.pem
 chmod +r /var/lib/nginx/dhparam.pem
 
+echo "[I] Download confs"
 mkdir fastgit-tmp
 cd fastgit-tmp
 git clone https://github.com/FastGitORG/nginx-conf --depth=1
 
+echo "[I] Install confs"
 cd nginx-conf
 
 cp *.conf /etc/nginx/sites-enabled
@@ -34,13 +42,15 @@ mkdir -p /www/wwwlogs
 cp robots.txt /www/wwwroot/fg
 echo "OK!" > /www/wwwroot/fg/index.html
 
+echo "[I] Clean tmp"
 cd ..
 rm -fR nginx-conf
 cd ..
 rm -fR fastgit-tmp
 
 # TODO: Put Cert
-echo "Please put cert and key to /var/www/cert"
+mkdir -p /www/wwwroot/cert
+echo "Please put cert(fg.pem) and key(fg.key) to /var/www/cert/"
 echo "Then reload nginx."
 echo "Thank you! :D"
 
