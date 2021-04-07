@@ -30,6 +30,7 @@ cd nginx-conf
 cp *.conf /etc/nginx/sites-enabled
 
 mkdir -p /www/wwwroot/fg
+mkdir -p /www/wwwlogs
 cp robots.txt /www/wwwroot/fg
 echo "OK!" > /www/wwwroot/fg/index.html
 
