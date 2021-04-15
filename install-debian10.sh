@@ -20,12 +20,12 @@ case $input in
 
     [nN][oO]|[nN])
         echo "You selected no install"
-       	;;
+        ;;
 
     *)
         echo "Invalid input..."
         exit 1
-		;;
+        ;;
 esac
 
 echo "[I] Basic operations"
