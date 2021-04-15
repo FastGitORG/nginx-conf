@@ -11,6 +11,23 @@ if [ ! -f "/etc/debian_version" ]; then
     exit 1
 fi
 
+read -r -p "Install FastGit.org front? [Y/n] " input
+
+case $input in
+    [yY][eE][sS]|[yY])
+        echo "You selected install"
+        ;;
+
+    [nN][oO]|[nN])
+        echo "You selected no install"
+       	;;
+
+    *)
+        echo "Invalid input..."
+        exit 1
+		;;
+esac
+
 echo "[I] Basic operations"
 apt update
 
@@ -41,6 +58,18 @@ mkdir -p /www/wwwroot/fg
 mkdir -p /www/wwwlogs
 cp robots.txt /www/wwwroot/fg
 echo "OK!" > /www/wwwroot/fg/index.html
+
+echo "[I] Process FastGit.org index.html"
+case $input in
+    [yY][eE][sS]|[yY])
+        git clone "https://github.com/FastGitORG/www" /www/wwwroot/fgorg
+        rm -rf /www/wwwroot/fgorg/.git
+        ;;
+
+    [nN][oO]|[nN])
+        rm -f /etc/nginx/sites-enabled/fastgit.org.conf
+        ;;
+esac
 
 echo "[I] Clean tmp"
 cd ..
