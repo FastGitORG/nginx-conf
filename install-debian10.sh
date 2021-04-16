@@ -64,6 +64,8 @@ case $input in
     [yY][eE][sS]|[yY])
         git clone "https://github.com/FastGitORG/www" /www/wwwroot/fgorg
         rm -rf /www/wwwroot/fgorg/.git
+        rm -rf /www/wwwroot/fgorg/README.md
+        rm -rf /www/wwwroot/fgorg/LICENSE
         ;;
 
     [nN][oO]|[nN])
