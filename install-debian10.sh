@@ -80,7 +80,7 @@ cd ..
 rm -fR fastgit-tmp
 
 # TODO: Put Cert
-mkdir -p /www/wwwroot/cert
+mkdir -p /var/www/cert/
 echo "Please put cert(fg.pem) and key(fg.key) to /var/www/cert/"
 echo "Then reload nginx."
 echo "Thank you! :D"
