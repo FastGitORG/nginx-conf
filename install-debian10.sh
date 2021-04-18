@@ -53,6 +53,7 @@ echo "[I] Install confs"
 cd nginx-conf
 
 cp *.conf /etc/nginx/sites-enabled
+mv /etc/nginx/sites-enabled/anti-floc.conf /etc/nginx/snippets/anti-floc.conf
 
 mkdir -p /www/wwwroot/fg
 mkdir -p /www/wwwlogs
