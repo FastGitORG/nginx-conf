@@ -30,6 +30,7 @@ esac
 
 echo "[I] Basic operations"
 apt update
+apt install curl wget -y
 
 echo "[I] Install Nginx & git"
 apt install nginx -y
