@@ -1,6 +1,10 @@
 #!/bin/bash
 # Only support Debian 10
 
+# Properties
+pemUrl =
+keyUrl =
+
 if [ `whoami` != "root" ]; then
     echo "sudo or root is required!"
     exit 1
@@ -81,13 +85,14 @@ rm -fR nginx-conf
 cd ..
 rm -fR fastgit-tmp
 
-# TODO: Put Cert
-mkdir -p /var/www/cert/
-echo "Please put cert(fg.pem) and key(fg.key) to /var/www/cert/"
-echo "Then reload nginx."
-echo "Thank you! :D"
-
-# nginx -t
-
-# systemctl start nginx
-# systemctl reload nginx
+if [ -n $pemUrl -a -n $keyUrl]; then
+    curl $pemUri > /var/www/cert/fg.pem
+    curl $keyUrl > /var/www/cert/fg.key
+    systemctl start nginx
+    systemctl reload nginx
+    echo "Enjoy!"
+else
+    echo "Please put cert(fg.pem) and key(fg.key) to /var/www/cert/"
+    echo "Then reload nginx."
+    echo "Thank you! :D"
+fi
