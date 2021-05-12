@@ -30,7 +30,7 @@ esac
 
 echo "[I] Basic operations"
 apt update
-apt install curl wget -y
+apt install curl wget nano -y
 
 echo "[I] Install Nginx & git"
 apt install nginx -y
@@ -83,11 +83,12 @@ rm -fR fastgit-tmp
 
 # TODO: Put Cert
 mkdir -p /var/www/cert/
-echo "Please put cert(fg.pem) and key(fg.key) to /var/www/cert/"
-echo "Then reload nginx."
-echo "Thank you! :D"
+nano /var/www/cert/fg.pem
+nanp /var/www/cert/fg.key
 
-# nginx -t
+nginx -t
 
-# systemctl start nginx
-# systemctl reload nginx
+systemctl start nginx
+systemctl reload nginx
+
+echo "Enjoy! :D"
