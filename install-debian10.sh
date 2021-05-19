@@ -81,9 +81,12 @@ rm -fR nginx-conf
 cd ..
 rm -fR fastgit-tmp
 
-# TODO: Put Cert
 mkdir -p /var/www/cert/
+
+echo "Please delete this line, enter certification here, and save" > /var/www/cert/fg.pem
 nano /var/www/cert/fg.pem
+
+echo "Please delete this line, enter private key here, and save" > /var/www/cert/fg.key
 nanp /var/www/cert/fg.key
 
 nginx -t
