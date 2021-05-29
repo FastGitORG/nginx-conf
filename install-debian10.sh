@@ -87,7 +87,7 @@ echo "Please delete this line, enter certification here, and save" > /var/www/ce
 nano /var/www/cert/fg.pem
 
 echo "Please delete this line, enter private key here, and save" > /var/www/cert/fg.key
-nanp /var/www/cert/fg.key
+nano /var/www/cert/fg.key
 
 nginx -t
 
