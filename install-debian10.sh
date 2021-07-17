@@ -13,6 +13,12 @@ fi
 
 input = $1
 isInstallFront = true
+skipCa = false
+
+if [ "$1" = "s" ];then
+    skipCa = true
+    input = "y"
+fi
 
 if [ ! -n $input ]; then
     read -r -p "Install FastGit.org front? [Y/n] " input
@@ -87,6 +93,14 @@ cd ..
 rm -fR fastgit-tmp
 
 mkdir -p /var/www/cert/
+
+if $skipCa; then
+    echo "Please put certification at /var/www/cert/fg.pem"
+    echo "Put private key at /var/www/cert/fg.key"
+    echo "Then run systemctl start nginx && systemctl reload nginx"
+    echo "Enjoy! :D"
+    exit 0
+fi
 
 echo "Please delete this line, enter certification here, and save" > /var/www/cert/fg.pem
 nano /var/www/cert/fg.pem
