@@ -14,7 +14,7 @@ fi
 input = $1
 isInstallFront = true
 
-if [ ! $input ]; then
+if [ ! -n $input ]; then
     read -r -p "Install FastGit.org front? [Y/n] " input
 fi    
 
