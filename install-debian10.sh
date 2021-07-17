@@ -11,7 +11,12 @@ if [ ! -f "/etc/debian_version" ]; then
     exit 1
 fi
 
-read -r -p "Install FastGit.org front? [Y/n] " input
+input = $1
+
+if [ ! $input ]; then
+    read -r -p "Install FastGit.org front? [Y/n] " input
+fi    
+
 
 case $input in
     [yY][eE][sS]|[yY])
