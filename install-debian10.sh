@@ -20,7 +20,7 @@ if [ "$1" = "s" ];then
     input = "y"
 fi
 
-if [ ! -n $input ]; then
+if [ -z $input ]; then
     read -r -p "Install FastGit.org front? [Y/n] " input
 fi    
 
