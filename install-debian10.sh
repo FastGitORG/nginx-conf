@@ -12,6 +12,7 @@ if [ ! -f "/etc/debian_version" ]; then
 fi
 
 input = $1
+isInstallFront = true
 
 if [ ! $input ]; then
     read -r -p "Install FastGit.org front? [Y/n] " input
@@ -21,10 +22,12 @@ fi
 case $input in
     [yY][eE][sS]|[yY])
         echo "You selected install"
+        isInstallFront = true
         ;;
 
     [nN][oO]|[nN])
         echo "You selected no install"
+        isInstallFront = false
         ;;
 
     *)
@@ -67,18 +70,15 @@ cp robots.txt /www/wwwroot/fg
 echo "OK!" > /www/wwwroot/fg/index.html
 
 echo "[I] Process FastGit.org index.html"
-case $input in
-    [yY][eE][sS]|[yY])
-        git clone "https://github.com/FastGitORG/www" /www/wwwroot/fgorg
-        rm -rf /www/wwwroot/fgorg/.git
-        rm -rf /www/wwwroot/fgorg/README.md
-        rm -rf /www/wwwroot/fgorg/LICENSE
-        ;;
 
-    [nN][oO]|[nN])
-        rm -f /etc/nginx/sites-enabled/fastgit.org.conf
-        ;;
-esac
+if $isInstallFront; then
+    git clone "https://github.com/FastGitORG/www" /www/wwwroot/fgorg
+    rm -rf /www/wwwroot/fgorg/.git
+    rm -rf /www/wwwroot/fgorg/README.md
+    rm -rf /www/wwwroot/fgorg/LICENSE
+else
+    rm -f /etc/nginx/sites-enabled/fastgit.org.conf
+fi
 
 echo "[I] Clean tmp"
 cd ..
