@@ -11,13 +11,13 @@ if [ ! -f "/etc/debian_version" ]; then
     exit 1
 fi
 
-input = $1
-isInstallFront = true
-skipCa = false
+input=$1
+isInstallFront=true
+skipCa=false
 
 if [ "$1" = "s" ];then
-    skipCa = true
-    input = "y"
+    skipCa=true
+    input="y"
 fi
 
 if [ -z $input ]; then
@@ -28,12 +28,12 @@ fi
 case $input in
     [yY][eE][sS]|[yY])
         echo "You selected install"
-        isInstallFront = true
+        isInstallFront=true
         ;;
 
     [nN][oO]|[nN])
         echo "You selected no install"
-        isInstallFront = false
+        isInstallFront=false
         ;;
 
     *)
