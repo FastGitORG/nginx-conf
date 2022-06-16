@@ -13,6 +13,7 @@ fi
 
 input=$1
 isInstallFront=true
+isInstallXyz=true
 skipCa=false
 
 if [ "$1" = "s" ];then
@@ -34,6 +35,28 @@ case $input in
     [nN][oO]|[nN])
         echo "You selected no install"
         isInstallFront=false
+        ;;
+
+    *)
+        echo "Invalid input..."
+        exit 1
+        ;;
+esac
+
+if [ -z $input ]; then
+    read -r -p "Install FastGit.xyz [Y/n] " input
+fi    
+
+
+case $input in
+    [yY][eE][sS]|[yY])
+        echo "You selected install"
+        isInstallXyz=true
+        ;;
+
+    [nN][oO]|[nN])
+        echo "You selected no install"
+        isInstallXyz=false
         ;;
 
     *)
@@ -74,6 +97,15 @@ mkdir -p /www/wwwroot/fg
 mkdir -p /www/wwwlogs
 cp robots.txt /www/wwwroot/fg
 echo "OK!" > /www/wwwroot/fg/index.html
+
+if $isInstallXyz; then
+    echo "Please delete this line, enter XYZ certification here, and save" > /var/www/cert/fgxyz.pem
+    nano /var/www/cert/fgxyz.pem
+    echo "Please delete this line, enter XYZ private key here, and save" > /var/www/cert/fgxyz.key
+    nano /var/www/cert/fgxyz.key
+else
+    rm -f /etc/nginx/sites-enabled/hub.fastgit.xyz.conf
+fi
 
 echo "[I] Process FastGit.org index.html"
 
