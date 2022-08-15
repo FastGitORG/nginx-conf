@@ -44,7 +44,7 @@ case $input in
 esac
 
 if [ -z $inputXyz ]; then
-    read -r -p "Install FastGit.xyz [Y/n] " input
+    read -r -p "Install FastGit.xyz [Y/n] " inputXyz
 fi    
 
 
