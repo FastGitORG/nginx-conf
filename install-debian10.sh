@@ -43,12 +43,12 @@ case $input in
         ;;
 esac
 
-if [ -z $input ]; then
+if [ -z $inputXyz ]; then
     read -r -p "Install FastGit.xyz [Y/n] " input
 fi    
 
 
-case $input in
+case $inputXyz in
     [yY][eE][sS]|[yY])
         echo "You selected install"
         isInstallXyz=true
@@ -98,6 +98,8 @@ mkdir -p /www/wwwlogs
 cp robots.txt /www/wwwroot/fg
 echo "OK!" > /www/wwwroot/fg/index.html
 
+
+mkdir -p /var/www/cert/
 if $isInstallXyz; then
     echo "Please delete this line, enter XYZ certification here, and save" > /var/www/cert/fgxyz.pem
     nano /var/www/cert/fgxyz.pem
@@ -123,8 +125,6 @@ cd ..
 rm -fR nginx-conf
 cd ..
 rm -fR fastgit-tmp
-
-mkdir -p /var/www/cert/
 
 if $skipCa; then
     echo "Please put certification at /var/www/cert/fg.pem"
