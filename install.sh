@@ -87,12 +87,16 @@ case $USE_DNS_API in
         read -p "Open the editor to write your certificate? (y/n): " OPEN_EDITOR
         case $OPEN_EDITOR in
             [yY] | [yY][eE][sS] )
-                nano /etc/letsencrypt/live/$DOMAIN/fullchain.pem
-                nano /etc/letsencrypt/live/$DOMAIN/privkey.pem
+                editor /etc/letsencrypt/live/$DOMAIN/fullchain.pem
+                editor /etc/letsencrypt/live/$DOMAIN/privkey.pem
                 ;;
             [nN] | [nN][oO] )
                 echo "Please write your own certificate to /etc/letsencrypt/live/$DOMAIN/fullchain.pem and /etc/letsencrypt/live/$DOMAIN/privkey.pem"
                 read -p "When you are done, press any key to continue..."
+                if [ ! -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ] || [ ! -f "/etc/letsencrypt/live/$DOMAIN/privkey.pem" ]; then
+                    echo "Certificate not found! Fuck off!"
+                    exit 1
+                fi
                 ;;
             *)
                 echo "Invalid input!"
