@@ -29,7 +29,7 @@ if [ ! -f "/etc/debian_version" ]; then
 fi
 
 # Input the domain name
-read -p "Enter your domain name (fastgit.xyz): " DOMAIN
+read -p "Enter your domain name (e.g. fastgit.org): " DOMAIN
 
 # Ask if using DNS API
 read -p "Do you want to use DNS API to get a wildcard certificate? (y/n): " USE_DNS_API
@@ -66,6 +66,7 @@ case $USE_DNS_API in
         esac
 
         # Write the DNS API key to a file
+        mkdir -p /etc/letsencrypt
         case $DNS_PROVIDER in
             cloudflare)
                 echo dns_cloudflare_api_key = \"$DNS_API_KEY\" > /etc/letsencrypt/$DNS_PROVIDER.ini
@@ -73,7 +74,7 @@ case $USE_DNS_API in
             digitalocean)
                 echo dns_digitalocean_token = \"$DNS_API_KEY\" > /etc/letsencrypt/$DNS_PROVIDER.ini
                 ;;
-            *)
+            *) # linode, vultr
                 echo dns_${DNS_PROVIDER}_key = \"$DNS_API_KEY\" > /etc/letsencrypt/$DNS_PROVIDER.ini
                 ;;
         esac
@@ -132,7 +133,7 @@ case $USE_DNS_API in
         ;;
 esac
 
-if [! -f /etc/letsencrypt/ssl_dhparams.pem]; then
+if [ ! -f /etc/letsencrypt/ssl_dhparams.pem ]; then
     echo "Installing dhparam from Mozilla..."
     curl -q https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/letsencrypt/ssl-dhparams.pem
 fi
