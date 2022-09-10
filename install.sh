@@ -126,7 +126,7 @@ esac
 case $USE_DNS_API in
     y )
         echo "Getting certificate..."
-        certbot certonly --dns-$DNS_PROVIDER --dns-$DNS_PROVIDER-credentials /etc/letsencrypt/$DNS_PROVIDER.ini --dns-$DNS_PROVIDER-propagation-seconds 60 \
+        certbot certonly --dns-$DNS_PROVIDER --dns-$DNS_PROVIDER-credentials /etc/letsencrypt/$DNS_PROVIDER.ini --dns-$DNS_PROVIDER-propagation-seconds 30 \
             -d *.$DOMAIN -d $DOMAIN --agree-tos --register-unsafely-without-email
         ;;
     n )
