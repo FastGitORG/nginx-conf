@@ -10,7 +10,7 @@
 #   - assets.example.com
 #   - raw.example.com
 # - A DNS API key for your domain name provider that is supported by certbot (https://certbot.eff.org/docs/using.html#dns-plugins)
-#   Currently supported providers: Cloudflare, DigitalOcean, GoDaddy, Google, Linode, OVH, Vultr (PR welcome for more)
+#   Currently supported providers: Cloudflare, DigitalOcean, Linode, Vultr (PR welcome for more)
 #   Alternatively, you can get your own *wildcard* SSL certification and deploy it.
 
 # Usage:
@@ -53,18 +53,8 @@ case $USE_DNS_API in
                 DNS_PROVIDER=digitalocean
                 DNS_PROVIDER_PACKAGE="python3-certbot-dns-digitalocean"
                 ;;
-            godaddy)
-                DNS_PROVIDER_PACKAGE="python3-certbot-dns-godaddy"
-                ;;
-            google|gce)
-                DNS_PROVIDER=google
-                DNS_PROVIDER_PACKAGE="python3-certbot-dns-google"
-                ;;
             linode)
                 DNS_PROVIDER_PACKAGE="python3-certbot-dns-linode"
-                ;;
-            ovh)
-                DNS_PROVIDER_PACKAGE="python3-certbot-dns-ovh"
                 ;;
             vultr)
                 DNS_PROVIDER_PACKAGE="python3-certbot-dns-vultr"
@@ -76,7 +66,17 @@ case $USE_DNS_API in
         esac
 
         # Write the DNS API key to a file
-        echo dns_${DNS_PROVIDER}_credentials = \"${DNS_API_KEY}\" > /etc/letsencrypt/${DNS_PROVIDER}.ini
+        case $DNS_PROVIDER in
+            cloudflare)
+                echo dns_cloudflare_api_key = \"$DNS_API_KEY\" > /etc/letsencrypt/$DNS_PROVIDER.ini
+                ;;
+            digitalocean)
+                echo dns_digitalocean_token = \"$DNS_API_KEY\" > /etc/letsencrypt/$DNS_PROVIDER.ini
+                ;;
+            *)
+                echo dns_${DNS_PROVIDER}_key = \"$DNS_API_KEY\" > /etc/letsencrypt/$DNS_PROVIDER.ini
+                ;;
+        esac
         ;;
 
     [nN] | [nN][oO] )
