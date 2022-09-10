@@ -133,9 +133,9 @@ case $USE_DNS_API in
         ;;
 esac
 
-if [ ! -f /etc/letsencrypt/ssl_dhparams.pem ]; then
+if [ ! -f /etc/letsencrypt/ssl-dhparams.pem ]; then
     echo "Installing dhparam from Mozilla..."
-    curl -q https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/letsencrypt/ssl_dhparams.pem
+    curl -q https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/letsencrypt/ssl-dhparams.pem
 fi
 
 # Proceed the configuration files
