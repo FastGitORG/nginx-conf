@@ -135,7 +135,7 @@ esac
 
 if [ ! -f /etc/letsencrypt/ssl_dhparams.pem ]; then
     echo "Installing dhparam from Mozilla..."
-    curl -q https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/letsencrypt/ssl-dhparams.pem
+    curl -q https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/letsencrypt/ssl_dhparams.pem
 fi
 
 # Proceed the configuration files
