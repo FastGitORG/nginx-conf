@@ -160,5 +160,6 @@ rm -rf /var/www/fastgit/.git* /var/www/fastgit/README /var/www/fastgit/LICENSE
 
 nginx -t
 systemctl enable --now nginx
+systemctl restart nginx
 
 echo "Enjoy! :D"
